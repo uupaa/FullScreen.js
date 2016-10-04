@@ -1,0 +1,89 @@
+<!DOCTYPE html><html><head><title>FullScreen test</title>
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta charset="utf-8"></head><body>
+
+<script src="../../lib/WebModule.js"></script>
+<script>
+WebModule.VERIFY  = true;
+WebModule.VERBOSE = true;
+WebModule.PUBLISH = true;
+</script>
+
+
+<script src="../wmtools.js"></script>
+<script src="../../lib/FullScreen.js"></script>
+<script src="../../release/FullScreen.b.min.js"></script>
+<script src="../testcase.js"></script>
+
+<style>
+#content { width: 100%; height: 100%; background-color: skyblue; }
+#trace { width: 100%; height: 100px; overflow: hidden;
+</style>
+
+<div id="content">
+<button onclick="_fullscreen(this)">FullScreen.request()</button> |
+<button onclick="_toggle(this)">FullScreen.toggle()</button> |
+<button onclick="_exit(this)">FullScreen.exit()</button> |
+<button onclick="_release(this)">FullScreen.release()</button>
+<br>
+<output id="output"></output>
+</div>
+
+
+<script>
+var content = document.querySelector("#content");
+var output = document.querySelector("#output");
+
+window.onload = function() {
+  if (FullScreen.enable) {
+    FullScreen.on("change", _onchange);
+    FullScreen.on("error",  _onerror);
+    setTimeout(_tick, 1000);
+  } else {
+    output.innerHTML += "FullScreen API is not supported";
+  }
+}
+function _onchange(eventType) { console.info("FullScreen change event", eventType); }
+function _onerror(eventType)  { console.info("FullScreen error event",  eventType); }
+
+function _release() {
+  FullScreen.off("change", _onchange);
+  FullScreen.off("error",  _onerror);
+  FullScreen.release();
+  output.innerHTML += "x";
+}
+
+function _tick() {
+  setTimeout(_tick, 1000);
+
+  if (FullScreen.enable) {
+    if (FullScreen.isActive()) {
+      output.innerHTML += "A";
+      if (FullScreen.getActiveNode() !== content) {
+        document.body.backgroundColor = "red";
+      }
+    } else {
+      output.innerHTML += "-";
+    }
+  }
+}
+function _fullscreen(event) {
+  if (FullScreen.enable) {
+    FullScreen.request(content);
+  }
+}
+function _toggle(event) {
+  if (FullScreen.enable) {
+    FullScreen.toggle(content);
+  }
+}
+function _exit(event) {
+  if (FullScreen.enable) {
+    FullScreen.exit();
+  }
+}
+</script>
+
+
+</body></html>
+

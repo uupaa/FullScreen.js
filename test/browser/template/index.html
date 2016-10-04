@@ -1,21 +1,23 @@
-# FullScreen.js [![Build Status](https://travis-ci.org/uupaa/FullScreen.js.svg)](https://travis-ci.org/uupaa/FullScreen.js)
+<!DOCTYPE html><html><head><title>FullScreen test</title>
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta charset="utf-8"></head><body>
 
-[![npm](https://nodei.co/npm/uupaa.fullscreen.js.svg?downloads=true&stars=true)](https://nodei.co/npm/uupaa.fullscreen.js/)
+<script src="../../lib/WebModule.js"></script>
+<script>
+WebModule.VERIFY  = __WEBMODULE_VERIFY__;
+WebModule.VERBOSE = __WEBMODULE_VERBOSE__;
+WebModule.PUBLISH = __WEBMODULE_PUBLISH__;
+</script>
 
-FullScreen API Wrapper.
+__MODULES__
+__WMTOOLS__
+__SOURCES__
+__OUTPUT__
+__TEST_CASE__
 
-This module made of [WebModule](https://github.com/uupaa/WebModule).
-
-## Documentation
-- [Spec](https://github.com/uupaa/FullScreen.js/wiki/)
-- [API Spec](https://github.com/uupaa/FullScreen.js/wiki/FullScreen)
-
-## Browser, NW.js and Electron
-
-```js
 <style>
 #content { width: 100%; height: 100%; background-color: skyblue; }
-#trace { width: 100%; height: 100px; overflow: hidden;
+#trace { width: 100%; height: 100px; }
 </style>
 
 <div id="content">
@@ -26,10 +28,7 @@ This module made of [WebModule](https://github.com/uupaa/WebModule).
 <output id="output"></output>
 </div>
 
-<script src="<module-dir>/lib/WebModule.js"></script>
-<script src="<module-dir>/lib/FullScreen.js"></script>
 <script>
-
 var content = document.querySelector("#content");
 var output = document.querySelector("#output");
 
@@ -80,6 +79,7 @@ function _exit() {
   if (FullScreen.enable) { FullScreen.exit(); }
 }
 </script>
-```
 
+
+</body></html>
 
