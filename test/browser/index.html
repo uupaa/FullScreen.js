@@ -17,18 +17,16 @@ WebModule.PUBLISH = true;
 
 <style>
 #content { width: 100%; height: 100%; background-color: skyblue; }
-#trace { width: 100%; height: 100px; overflow: hidden;
+#trace { width: 100%; height: 100px; }
 </style>
 
 <div id="content">
-<button onclick="_fullscreen(this)">FullScreen.request()</button> |
-<button onclick="_toggle(this)">FullScreen.toggle()</button> |
-<button onclick="_exit(this)">FullScreen.exit()</button> |
-<button onclick="_release(this)">FullScreen.release()</button>
-<br>
+<button onclick="_fullscreen()">FullScreen.request()</button> |
+<button onclick="_toggle()">FullScreen.toggle()</button> |
+<button onclick="_exit()">FullScreen.exit()</button> |
+<button onclick="_release()">FullScreen.release()</button><br>
 <output id="output"></output>
 </div>
-
 
 <script>
 var content = document.querySelector("#content");
@@ -36,19 +34,23 @@ var output = document.querySelector("#output");
 
 window.onload = function() {
   if (FullScreen.enable) {
-    FullScreen.on("change", _onchange);
-    FullScreen.on("error",  _onerror);
+    FullScreen.on("fullscreenchange", _onfullscreenchange);
+    FullScreen.on("fullscreenerror",  _onfullscreenerror);
     setTimeout(_tick, 1000);
   } else {
     output.innerHTML += "FullScreen API is not supported";
   }
 }
-function _onchange(eventType) { console.info("FullScreen change event", eventType); }
-function _onerror(eventType)  { console.info("FullScreen error event",  eventType); }
+function _onfullscreenchange(eventType, event) {
+  console.info("FullScreen change event", eventType); // -> "fullscreenchange"
+}
+function _onfullscreenerror(eventType, event) {
+  console.info("FullScreen error event", eventType); // -> "fullscreenerror"
+}
 
 function _release() {
-  FullScreen.off("change", _onchange);
-  FullScreen.off("error",  _onerror);
+  FullScreen.off("fullscreenchange", _onfullscreenchange);
+  FullScreen.off("fullscreenerror",  _onfullscreenerror);
   FullScreen.release();
   output.innerHTML += "x";
 }
@@ -67,20 +69,14 @@ function _tick() {
     }
   }
 }
-function _fullscreen(event) {
-  if (FullScreen.enable) {
-    FullScreen.request(content);
-  }
+function _fullscreen() {
+  if (FullScreen.enable) { FullScreen.request(content); }
 }
-function _toggle(event) {
-  if (FullScreen.enable) {
-    FullScreen.toggle(content);
-  }
+function _toggle() {
+  if (FullScreen.enable) { FullScreen.toggle(content); }
 }
-function _exit(event) {
-  if (FullScreen.enable) {
-    FullScreen.exit();
-  }
+function _exit() {
+  if (FullScreen.enable) { FullScreen.exit(); }
 }
 </script>
 

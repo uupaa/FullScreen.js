@@ -35,23 +35,23 @@ var output = document.querySelector("#output");
 
 window.onload = function() {
   if (FullScreen.enable) {
-    FullScreen.on("change", _onchange);
-    FullScreen.on("error",  _onerror);
+    FullScreen.on("fullscreenchange", _onfullscreenchange);
+    FullScreen.on("fullscreenerror",  _onfullscreenerror);
     setTimeout(_tick, 1000);
   } else {
     output.innerHTML += "FullScreen API is not supported";
   }
 }
-function _onchange(eventType, event) {
-  console.info("FullScreen change event", eventType); // -> "change"
+function _onfullscreenchange(eventType, event) {
+  console.info("FullScreen change event", eventType); // -> "fullscreenchange"
 }
-function _onerror(eventType, event) {
-  console.info("FullScreen error event", eventType); // -> "error"
+function _onfullscreenerror(eventType, event) {
+  console.info("FullScreen error event", eventType); // -> "fullscreenerror"
 }
 
 function _release() {
-  FullScreen.off("change", _onchange);
-  FullScreen.off("error",  _onerror);
+  FullScreen.off("fullscreenchange", _onfullscreenchange);
+  FullScreen.off("fullscreenerror",  _onfullscreenerror);
   FullScreen.release();
   output.innerHTML += "x";
 }
