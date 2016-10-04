@@ -15,7 +15,7 @@ This module made of [WebModule](https://github.com/uupaa/WebModule).
 ```js
 <style>
 #content { width: 100%; height: 100%; background-color: skyblue; }
-#trace { width: 100%; height: 100px; overflow: hidden;
+#trace { width: 100%; height: 100px; }
 </style>
 
 <div id="content">
@@ -26,8 +26,8 @@ This module made of [WebModule](https://github.com/uupaa/WebModule).
 <output id="output"></output>
 </div>
 
-<script src="<module-dir>/lib/WebModule.js"></script>
-<script src="<module-dir>/lib/FullScreen.js"></script>
+<script src="./lib/WebModule.js"></script>
+<script src="./lib/FullScreen.js"></script>
 <script>
 
 var content = document.querySelector("#content");
