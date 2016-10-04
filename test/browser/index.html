@@ -12,8 +12,6 @@ WebModule.PUBLISH = true;
 
 <script src="../wmtools.js"></script>
 <script src="../../lib/FullScreen.js"></script>
-<script src="../../release/FullScreen.b.min.js"></script>
-<script src="../testcase.js"></script>
 
 <style>
 #content { width: 100%; height: 100%; background-color: skyblue; }
@@ -34,23 +32,19 @@ var output = document.querySelector("#output");
 
 window.onload = function() {
   if (FullScreen.enable) {
-    FullScreen.on("fullscreenchange", _onfullscreenchange);
-    FullScreen.on("fullscreenerror",  _onfullscreenerror);
+    FullScreen.many("fullscreenchange", function _onfullscreenchange(eventType, event) {
+      console.info("FullScreen change event", eventType); // -> "fullscreenchange"
+    }, 3);
+    FullScreen.once("fullscreenchange", function _onfullscreenchange(eventType, event) {
+      console.info("FullScreen change event", eventType); // -> "fullscreenchange"
+    });
     setTimeout(_tick, 1000);
   } else {
     output.innerHTML += "FullScreen API is not supported";
   }
 }
-function _onfullscreenchange(eventType, event) {
-  console.info("FullScreen change event", eventType); // -> "fullscreenchange"
-}
-function _onfullscreenerror(eventType, event) {
-  console.info("FullScreen error event", eventType); // -> "fullscreenerror"
-}
 
 function _release() {
-  FullScreen.off("fullscreenchange", _onfullscreenchange);
-  FullScreen.off("fullscreenerror",  _onfullscreenerror);
   FullScreen.release();
   output.innerHTML += "x";
 }

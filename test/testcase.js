@@ -3,10 +3,10 @@ var ModuleTestFullScreen = (function(global) {
 var test = new Test(["FullScreen"], { // Add the ModuleName to be tested here (if necessary).
         disable:    false, // disable all tests.
         browser:    true,  // enable browser test.
-        worker:     true,  // enable worker test.
-        node:       true,  // enable node test.
-        nw:         true,  // enable nw.js test.
-        el:         true,  // enable electron (render process) test.
+        worker:     false, // enable worker test.
+        node:       false, // enable node test.
+        nw:         false, // enable nw.js test.
+        el:         false, // enable electron (render process) test.
         button:     true,  // show button.
         both:       true,  // test the primary and secondary modules.
         ignoreError:false, // ignore error.
